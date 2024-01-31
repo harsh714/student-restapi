@@ -18,6 +18,17 @@ public class StudentService {
         return list;
     }
 
+    //get a single student data by id
+    public Student getStudentById(int id){
+        Student student = null;
+        try {
+            student = this.studentRepo.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
     //add student data
     public void addStudent(Student stu){
         this.studentRepo.save(stu);

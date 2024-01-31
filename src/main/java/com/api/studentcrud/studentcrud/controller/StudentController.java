@@ -27,10 +27,19 @@ public class StudentController {
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getStudents() {
         List<Student> list = this.studentService.getAllStudents();
-        if (list == null) {
+        if (list.size() <= 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.of(Optional.of(list));
+    }
+
+    @GetMapping("/student/{id}")
+    public ResponseEntity<Student> getStudentDataById(@PathVariable("id") int id) {
+        Student student= this.studentService.getStudentById(id);
+        if (student == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.of(Optional.of(student));
     }
 
     @PostMapping("/addstudent")
